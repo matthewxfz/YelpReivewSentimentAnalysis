@@ -134,7 +134,7 @@ model.save(model_name)
 model.doesnt_match("I disdain this nightclub.".split())
 
 #%%
-model2 = word2vec.Word2Vec.load("300features_40minwords_10context")
+model2 = word2vec.Word2Vec.load("/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src/300features_40minwords_10context")
 
 #%%
 def makeFeatureVec(words, model, num_features):
