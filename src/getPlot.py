@@ -27,7 +27,7 @@ dirpath = os.path.dirname(os.path.realpath(__file__))
 import pandas as pd
 import numpy as np
 import sys
-sys.path.append(dir_path)
+sys.path.append(dirpath)
 import tsne as t
 import util
 sys.setdefaultencoding("utf-8")
@@ -46,4 +46,4 @@ wv_embendded = TSNE(n_components=2).fit_transform(model.wv.syn0)
 print("write TSNE result")
 util.writeSenence(dirpath+"wv_embendded.csv",wv_embendded)
 
-print("Wrote in %s", % (dirpath+"wv_embendded.csv"))
+print("Wrote in %s" % (dirpath))
