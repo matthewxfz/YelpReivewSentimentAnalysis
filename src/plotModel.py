@@ -17,7 +17,6 @@ import os
 dirpath = os.path.dirname(os.path.realpath(__file__))
 
 
-
 sys.path.append("/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src")
 import util
 
@@ -46,6 +45,7 @@ def plot_with_labels(low_dim_embs, labels, idx, filename='images/tsne3.png',font
 #%%
 from gensim.models import word2vec, Phrases
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 
 model = word2vec.Word2Vec.load(modelpath);
 #%%
@@ -58,7 +58,6 @@ for line in file:
      wv_arr.append([float(wv[0]), float(wv[1])])
      
 wv_arr = np.array(wv_arr, dtype = float)
-#%%
 
 #%% cluster the model
 from sklearn.cluster import KMeans
@@ -66,7 +65,7 @@ import time
 
 start = time.time() # Start time
 
-# Set "k" (num_clusters) to be 1/5th of the vocabulary size, or an
+# Set "k" (num_clusters) to be 1/5th of the vocabulary size, or ans
 # average of 5 words per cluster
 word_vectors = model.wv.syn0
 num_clusters = 50;
@@ -76,7 +75,7 @@ kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 5, n_jobs = 10
 idx = kmeans_clustering.fit_predict( word_vectors )
 
 print("start printing!")
-plot_with_labels(wv_arr[0:10,:], model.wv.index2word[0:10],idx[0:10]);
+plot_with_labels(wv_arr[0:1000,:], model.wv.index2word[0:1000],idx[0:1000]);
 print("end printing!")
 
 # Get the end time and print how long the process took
