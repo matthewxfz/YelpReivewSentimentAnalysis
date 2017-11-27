@@ -24,14 +24,14 @@ import util
 outputfile = dirpath + "/wv_embendded.csv"
 modelpath = dirpath + "/yelpLtraining";
 outpufpng = dirpath + "/wcloud.png"
+outpufpng = dirpath + "/wcloud_cluster.png"
 
-def plot_with_labels(low_dim_embs, labels, idx, filename='images/tsne3.png',fonts=None):
+def plot_with_labels(low_dim_embs, labels, idx, filename=outpufpng,fonts=None):
     assert low_dim_embs.shape[0] >= len(labels), "More labels than embeddings"
     plt.figure(figsize=(18, 18))  # in inches
     for i, label in enumerate(labels):
-        x, y = low_dim_embs[i, :]
-        color = idx[i];
-        plt.scatter(x, y, c=color)
+        colors = idx[i];
+        plt.scatter(x, y)
         plt.annotate(label,
                     fontproperties=fonts,
                     xy=(x, y),
@@ -42,10 +42,16 @@ def plot_with_labels(low_dim_embs, labels, idx, filename='images/tsne3.png',font
 
     plt.savefig(filename,dpi=800)
     
+def plot_with_cluster(data, idx, filename=outpufpng,fonts=None):
+    assert low_dim_embs.shape[0] >= len(labels), "More labels than embeddings"
+    plt.figure(figsize=(18, 18))  # in inches
+    plt.scatter(data[:,0], data[:,1], c=idx)
+    plt.savefig(filename,dpi=800)
+    
 #%%
 from gensim.models import word2vec, Phrases
 import matplotlib.pyplot as plt
-plt.switch_backend('agg')
+#plt.switch_backend('agg')
 
 model = word2vec.Word2Vec.load(modelpath);
 #%%
@@ -68,14 +74,14 @@ start = time.time() # Start time
 # Set "k" (num_clusters) to be 1/5th of the vocabulary size, or ans
 # average of 5 words per cluster
 word_vectors = model.wv.syn0
-num_clusters = 50;
-
+num_clusters = 20;
+nr = 1000;
 # Initalize a k-means object and use it to extract centroids
 kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 5, n_jobs = 10,  )
 idx = kmeans_clustering.fit_predict( word_vectors )
-
 print("start printing!")
-plot_with_labels(wv_arr[0:1000,:], model.wv.index2word[0:1000],idx[0:1000]);
+plot_with_labels(wv_arr[0:nr,:], model.wv.index2word[0:nr], idx[0:nr]/50.0);
+plot_with_cluster(wv_arr[0:nr,:], idx[0:nr]/20.0)
 print("end printing!")
 
 # Get the end time and print how long the process took
