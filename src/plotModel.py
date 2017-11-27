@@ -44,7 +44,6 @@ def plot_with_labels(low_dim_embs, labels, idx, filename=outpufpng,fonts=None):
     plt.savefig(filename,dpi=800)
     
 def plot_with_cluster(data, idx, filename=outpufpng,fonts=None):
-    assert low_dim_embs.shape[0] >= len(labels), "More labels than embeddings"
     plt.figure(figsize=(18, 18))  # in inches
     plt.scatter(data[:,0], data[:,1], c=idx)
     plt.savefig(filename,dpi=800)
@@ -78,7 +77,7 @@ word_vectors = model.wv.syn0
 num_clusters = 20;
 nr = 1000;
 # Initalize a k-means object and use it to extract centroids
-kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 5, n_jobs = 10,  )
+kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 300, n_jobs = 20,  )
 idx = kmeans_clustering.fit_predict( word_vectors )
 print("start printing!")
 plot_with_labels(wv_arr[0:nr,:], model.wv.index2word[0:nr], idx[0:nr]/50.0);
