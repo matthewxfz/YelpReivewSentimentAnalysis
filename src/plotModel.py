@@ -13,7 +13,6 @@ import pandas as pd
 import numpy as np
 import sys
 sys.path.append("/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src")
-import tsne as t
 import util
 import os 
 dirpath = os.path.dirname(os.path.realpath(__file__))
