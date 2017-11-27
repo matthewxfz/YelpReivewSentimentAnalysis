@@ -16,8 +16,8 @@ import sys
 import os 
 dirpath = os.path.dirname(os.path.realpath(__file__))
 
-
-sys.path.append("/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src")
+#dirpath = "/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src";
+sys.path.append(dirpath)
 import util
 
 #dirpath = "/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/data"
