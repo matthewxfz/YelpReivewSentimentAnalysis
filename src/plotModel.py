@@ -22,7 +22,7 @@ sys.path.append(dirpath)
 import util
 
 #dirpath = "/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/data"
-outputfile = dirpath + "/wv_emnbendded.csv"
+outputfile = dirpath + "/wv_embendded.csv"
 modelpath = dirpath + "/yelpLtraining";
 outpufpng = dirpath + "/wcloud.png"
 
