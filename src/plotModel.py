@@ -20,6 +20,10 @@ dirpath = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dirpath)
 import util
 
+import nltk
+from nltk.cluster.kmeans import KMeansClusterer
+
+
 #dirpath = "/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/data"
 outputfile = dirpath + "/wv_embendded.csv"
 modelpath = dirpath + "/yelpLtraining";
@@ -44,6 +48,11 @@ def plot_with_labels(low_dim_embs, labels, idx, filename=outpufpng,fonts=None):
     plt.savefig(filename,dpi=800)
     
 def plot_with_cluster(data, idx, filename=outpufpng,fonts=None):
+    plt.figure(figsize=(18, 18))  # in inches
+    plt.scatter(data[:,0], data[:,1], c=idx)
+    plt.savefig(filename,dpi=800)
+    
+def plot_with_cluster_cos(data, idx, filename=outpufpng,fonts=None):
     plt.figure(figsize=(18, 18))  # in inches
     plt.scatter(data[:,0], data[:,1], c=idx)
     plt.savefig(filename,dpi=800)
@@ -77,8 +86,10 @@ word_vectors = model.wv.syn0
 num_clusters = 20;
 nr = 1000;
 # Initalize a k-means object and use it to extract centroids
-kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 300, n_jobs = 20,  )
-idx = kmeans_clustering.fit_predict( word_vectors )
+#kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 300, n_jobs = 20,  )
+kmeans_clustering = KMeansClusterer(num_clusters, distance=nltk.cluster.util.cosine_distance, repeats=300)
+idx = kmeans_clustering.cluster(word_vectors, True) 
+#idx = kmeans_clustering.fit_predict( word_vectors )
 print("start printing!")
 plot_with_labels(wv_arr[0:nr,:], model.wv.index2word[0:nr], idx[0:nr]);
 plot_with_cluster(wv_arr[0:nr,:], idx[0:nr]/20.0)
