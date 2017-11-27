@@ -12,10 +12,14 @@ import csv
 import pandas as pd
 import numpy as np
 import sys
-sys.path.append("/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/src")
-import util
+
 import os 
 dirpath = os.path.dirname(os.path.realpath(__file__))
+
+
+
+sys.path.append(dirpath)
+import util
 
 #dirpath = "/Users/matthewxfz/Workspaces/gits/course/YelpReivewSentimentAnalysis/data"
 outputfile = dirpath + "/wv_emnbendded.csv"
