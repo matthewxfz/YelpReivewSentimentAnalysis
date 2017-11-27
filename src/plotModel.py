@@ -52,7 +52,7 @@ def plot_with_cluster(data, idx, filename=outpufpng,fonts=None):
 #%%
 from gensim.models import word2vec, Phrases
 import matplotlib.pyplot as plt
-#plt.switch_backend('agg')
+plt.switch_backend('agg')
 
 model = word2vec.Word2Vec.load(modelpath);
 #%%
