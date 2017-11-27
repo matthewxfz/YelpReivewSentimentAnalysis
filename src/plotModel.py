@@ -32,7 +32,7 @@ def plot_with_labels(low_dim_embs, labels, idx, filename=outpufpng,fonts=None):
     for i, label in enumerate(labels):
         x, y = low_dim_embs[i, :]
         colors = idx[i];
-        plt.scatter(x, y)
+        plt.scatter(x, y, c = colors)
         plt.annotate(label,
                     fontproperties=fonts,
                     xy=(x, y),
@@ -80,7 +80,7 @@ nr = 1000;
 kmeans_clustering = KMeans( n_clusters = num_clusters, max_iter = 300, n_jobs = 20,  )
 idx = kmeans_clustering.fit_predict( word_vectors )
 print("start printing!")
-plot_with_labels(wv_arr[0:nr,:], model.wv.index2word[0:nr], idx[0:nr]/50.0);
+plot_with_labels(wv_arr[0:nr,:], model.wv.index2word[0:nr], idx[0:nr]);
 plot_with_cluster(wv_arr[0:nr,:], idx[0:nr]/20.0)
 print("end printing!")
 
